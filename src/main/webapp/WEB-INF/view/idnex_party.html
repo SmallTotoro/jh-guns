@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报名</title>
+
+    <script src="${ctxPath}/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${ctxPath}/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath}/static/js/plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="${ctxPath}/static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="${ctxPath}/static/js/plugins/validate/bootstrapValidator.min.js"></script>
+    <script src="${ctxPath}/static/js/plugins/validate/zh_CN.js"></script>
+    <script src="${ctxPath}/static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="${ctxPath}/static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="${ctxPath}/static/js/plugins/bootstrap-treetable/bootstrap-treetable.js"></script>
+    <script src="${ctxPath}/static/js/plugins/layer/layer.js"></script>
+    <script src="${ctxPath}/static/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="${ctxPath}/static/js/plugins/iCheck/icheck.min.js"></script>
+    <script src="${ctxPath}/static/js/plugins/laydate/laydate.js"></script>
+    <script src="${ctxPath}/static/js/plugins/webuploader/webuploader.min.js"></script>
+    <script src="${ctxPath}/static/js/common/ajax-object.js"></script>
+    <script src="${ctxPath}/static/js/common/bootstrap-table-object.js"></script>
+    <script src="${ctxPath}/static/js/common/tree-table-object.js"></script>
+    <script src="${ctxPath}/static/js/common/web-upload-object.js"></script>
+    <script src="${ctxPath}/static/js/common/ztree-object.js"></script>
+    <script src="${ctxPath}/static/js/common/Feng.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+    <link rel="shortcut icon" href="${ctxPath}/static/favicon.ico">
+    <link href="${ctxPath}/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctxPath}/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctxPath}/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="${ctxPath}/static/css/addstyle.css?v=4.1.0" rel="stylesheet">
+
+</head>
+<script>
+    // $().ready(function() {
+    //     $("#partyAddForm").validate({
+    //         submitHandler: function (form) {
+    //             submitForm();
+    //         }
+    //     })
+    // })
+
+    function submitForm() {
+
+        var partyInfoData = $('#partyAddForm').serializeArray();
+        var values = {};
+        for (x in partyInfoData) {
+            values[partyInfoData[x].name] = partyInfoData[x].value;
+        }
+        var formdata = JSON.stringify(values)
+        console.log(formdata);
+        //提交信息
+        var ajax = new $ax(Feng.ctxPath + "/party/add_any", function (data) {
+            // console.log(data);
+            if (data.code == 200) {
+                layer.msg("报名成功！");
+                initCount();
+            } else {
+                layer.msg(data.message);
+            }
+        }, function (data) {
+            layer.msg("系统故障！");
+        });
+        ajax.set(values);
+        ajax.start();
+    }
+
+    function initCount() {
+        var ajax = new $ax(Feng.ctxPath + "/party/count", function (data) {
+            $("#count").html(data.message);
+        }, function (data) {
+            //layer.msg(data.message);
+        });
+        ajax.set({});
+        ajax.start();
+    }
+
+    function search() {
+        var partyInfoData = $('#partyAddForm').serializeArray();
+        var values = {};
+        for (x in partyInfoData) {
+            values[partyInfoData[x].name] = partyInfoData[x].value;
+        }
+
+        var formdata = JSON.stringify(values)
+        console.log(formdata);
+        //提交信息
+        var ajax = new $ax(Feng.ctxPath + "/party/search", function (data) {
+            console.log(data);
+            if (data.result) {
+                //询问框
+                var str = data.message.name + "已报名！手机号码：" + data.message.phone + ",意见和建议：" + data.message.content;
+                var confirmid = layer.confirm(str, {
+                    btn: ['取消报名', '好的'] //按钮
+                }, function () {
+                    deleteParty(data.message.id);
+                    initCount();
+                    layer.close(confirmid);
+                }, function () {
+
+                });
+
+            } else {
+                layer.alert(data.message);
+            }
+
+
+        }, function (data) {
+            //layer.msg("系统故障！");
+        });
+        ajax.set(values);
+        ajax.start();
+    }
+
+    function deleteParty(id) {
+        var ajax = new $ax(Feng.ctxPath + "/party/delete", function (data) {
+        }, function (data) {
+        });
+        ajax.set({"partyId": id});
+        ajax.start();
+    }
+</script>
+<body class="party">
+
+<h3 style="font-size: 24px">目前已有<span style="font-size:30px; color:red" id="count">${count}</span>人报名</h3>
+<div class="container w3layouts agileits">
+    <div class="register w3layouts agileits">
+        <h2>报 名</h2>
+        <form id="partyAddForm" action="#" onsubmit="return false" method="post">
+            <input type="text" id="name" name="name" placeholder="姓名" required="required">
+            <input type="text" id="phone" name="phone" placeholder="手机号码" pattern="^1[345678][0-9]{9}$" required="required">
+            <input type="text" name="content" placeholder="意见和建议">
+            <div class="send-button w3layouts agileits">
+                <input type="submit" onclick="submitForm()" value="提交">  <input type="submit" onclick="search()" value="查询">
+            </div>
+        </form>
+
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+</body>
+
+</html>

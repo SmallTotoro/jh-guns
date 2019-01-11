@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>给我一点时间</title>
+    <link rel="shortcut icon" href="${ctxPath}/static/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="${ctxPath}/static/res/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="${ctxPath}/static/res/css/main.css">
+    <!--加载meta IE兼容文件-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- 腾讯地图 -->
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=JGGBZ-EVT3U-X3HVW-44FQB-OU6I3-G2FUM"></script>
+    <script>
+
+        var tencentMap;
+        window.onload = function () {
+            function init() {
+                // 创建地图
+                tencentMap = new qq.maps.Map(document.getElementById("tencentMap"), {
+                    center: new qq.maps.LatLng(22.809253, 108.344473),      // 地图的中心地理坐标
+                    zoom: 14,     // 地图缩放级别
+                    mapStyleId: 'style1'  // 该key绑定的style1对应于经典地图样式，若未绑定将弹出无权限提示窗
+                });
+                var center1 = new qq.maps.LatLng(22.809253, 108.344473);
+                var center2 = new qq.maps.LatLng(23.809253, 108.344473);
+                var marker1 = new qq.maps.Marker({
+                    id:"1",
+                    position: center1,
+                    map: tencentMap
+                });
+                var marker2 = new qq.maps.Marker({
+                    id:"2",
+                    position: center2,
+                    map: tencentMap
+                });
+                //添加到提示窗
+                var info = new qq.maps.InfoWindow({
+                    map: tencentMap
+                });
+                qq.maps.event.addListener(marker1, 'click', function() {
+                    //marker1.setMap(null);
+                    info.open();
+                    info.setContent('<div style="text-align:center;white-space:nowrap;'+
+                        'margin:10px;">单击标记</div>');
+                    info.setPosition(center1);
+                });
+                qq.maps.event.addListener(marker2, 'click', function() {
+
+                    //marker2.setMap(null);
+                    info.open();
+                    info.setContent('<div style="text-align:center;white-space:nowrap;'+
+                        'margin:10px;">单击标记</div>');
+                    info.setPosition(center2);
+                });
+            }
+            //调用初始化函数
+            init();
+        }
+
+    </script>
+</head>
+
+<body>
+<div class="banner">
+    <div class="cont w1000">
+        <div class="title">
+            <h3>给我<br/>一点时间</h3>
+            <h4>Give me a little time -敬请期待！</h4>
+        </div>
+        <div class="amount">
+            <!--<p><span class="text">访问量</span><span class="access">1000</span></p>
+            <p><span class="text">日志</span><span class="daily-record">1000</span></p>-->
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="cont w1000">
+        <!-- 腾讯地图 -->
+        <div class="row">
+            <div id="tencentMap" style="height: 550px"></div>
+        </div>
+
+        <div class="title">
+        <!--<span class="layui-breadcrumb" lay-separator="|">-->
+          <!--<a href="javascript:;" class="active">设计文章</a>-->
+          <!--<a href="javascript:;">前端文章</a>-->
+          <!--<a href="javascript:;">旅游杂记</a>-->
+        <!--</span>-->
+        </div>
+        <!--<div class="list-item">-->
+            <!--<div class="item">-->
+                <!--<div class="layui-fluid">-->
+                    <!--<div class="layui-row">-->
+                        <!--<div class="layui-col-xs12 layui-col-sm4 layui-col-md5">-->
+                            <!--<div class="img"><img src="${ctxPath}/static/res/img/sy_img1.jpg" alt=""></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-col-xs12 layui-col-sm8 layui-col-md7">-->
+                            <!--<div class="item-cont">-->
+                                <!--<h3>空间立体效果图，完美呈现最终效果-->
+                                    <!--<button class="layui-btn layui-btn-danger new-icon">new</button>-->
+                                <!--</h3>-->
+                                <!--<h5>设计文章</h5>-->
+                                <!--<p>-->
+                                    <!--室内设计作为一门新兴的学科，尽管还只是近数十年的事，但是人们有意识地对自己生活、生产活动的室内进行安排布置，甚至美化装饰，赋予室内环境以所祈使的气氛，却早巳从人类文明伊始的时期就已存在</p>-->
+                                <!--<a href="details.html" class="go-icon"></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="layui-fluid">-->
+                    <!--<div class="layui-row">-->
+                        <!--<div class="layui-col-xs12 layui-col-sm4 layui-col-md5">-->
+                            <!--<div class="img"><img src="${ctxPath}/static/res/img/sy_img2.jpg" alt=""></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-col-xs12 layui-col-sm8 layui-col-md7">-->
+                            <!--<div class="item-cont">-->
+                                <!--<h3>空间立体效果图，完美呈现最终效果-->
+                                    <!--<button class="layui-btn layui-btn-danger new-icon">new</button>-->
+                                <!--</h3>-->
+                                <!--<h5>设计文章</h5>-->
+                                <!--<p>-->
+                                    <!--室内设计作为一门新兴的学科，尽管还只是近数十年的事，但是人们有意识地对自己生活、生产活动的室内进行安排布置，甚至美化装饰，赋予室内环境以所祈使的气氛，却早巳从人类文明伊始的时期就已存在</p>-->
+                                <!--<a href="details.html" class="go-icon"></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="layui-fluid">-->
+                    <!--<div class="layui-row">-->
+                        <!--<div class="layui-col-xs12 layui-col-sm4 layui-col-md5">-->
+                            <!--<div class="img"><img src="${ctxPath}/static/res/img/sy_img3.jpg" alt=""></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-col-xs12 layui-col-sm8 layui-col-md7">-->
+                            <!--<div class="item-cont">-->
+                                <!--<h3>空间立体效果图，完美呈现最终效果-->
+                                    <!--<button class="layui-btn layui-btn-danger new-icon">new</button>-->
+                                <!--</h3>-->
+                                <!--<h5>设计文章</h5>-->
+                                <!--<p>-->
+                                    <!--室内设计作为一门新兴的学科，尽管还只是近数十年的事，但是人们有意识地对自己生活、生产活动的室内进行安排布置，甚至美化装饰，赋予室内环境以所祈使的气氛，却早巳从人类文明伊始的时期就已存在</p>-->
+                                <!--<a href="details.html" class="go-icon"></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="layui-fluid">-->
+                    <!--<div class="layui-row">-->
+                        <!--<div class="layui-col-xs12 layui-col-sm4 layui-col-md5">-->
+                            <!--<div class="img"><img src="${ctxPath}/static/res/img/sy_img4.jpg" alt=""></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-col-xs12 layui-col-sm8 layui-col-md7">-->
+                            <!--<div class="item-cont">-->
+                                <!--<h3>空间立体效果图，完美呈现最终效果-->
+                                    <!--<button class="layui-btn layui-btn-danger new-icon">new</button>-->
+                                <!--</h3>-->
+                                <!--<h5>设计文章</h5>-->
+                                <!--<p>-->
+                                    <!--室内设计作为一门新兴的学科，尽管还只是近数十年的事，但是人们有意识地对自己生活、生产活动的室内进行安排布置，甚至美化装饰，赋予室内环境以所祈使的气氛，却早巳从人类文明伊始的时期就已存在</p>-->
+                                <!--<a href="details.html" class="go-icon"></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="layui-fluid">-->
+                    <!--<div class="layui-row">-->
+                        <!--<div class="layui-col-xs12 layui-col-sm4 layui-col-md5">-->
+                            <!--<div class="img"><img src="${ctxPath}/static/res/img/sy_img5.jpg" alt=""></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-col-xs12 layui-col-sm8 layui-col-md7">-->
+                            <!--<div class="item-cont">-->
+                                <!--<h3>空间立体效果图，完美呈现最终效果-->
+                                    <!--<button class="layui-btn layui-btn-danger new-icon">new</button>-->
+                                <!--</h3>-->
+                                <!--<h5>设计文章</h5>-->
+                                <!--<p>-->
+                                    <!--室内设计作为一门新兴的学科，尽管还只是近数十年的事，但是人们有意识地对自己生活、生产活动的室内进行安排布置，甚至美化装饰，赋予室内环境以所祈使的气氛，却早巳从人类文明伊始的时期就已存在</p>-->
+                                <!--<a href="details.html" class="go-icon"></a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div id="demo" style="text-align: center;"></div>-->
+    </div>
+</div>
+
+<div class="footer-wrap">
+    <div class="footer w1000">
+        <p><a target="_blank" href="http://www.miitbeian.gov.cn/">桂ICP备19000108号-1</a></p>
+    </div>
+</div>
+<script type="text/javascript" src="${ctxPath}/static/res/layui/layui.js"></script>
+
+<script type="text/javascript">
+    layui.config({
+        base: '${ctxPath}/static/res/js/util/'
+    }).use(['element', 'laypage', 'jquery', 'menu'], function () {
+        element = layui.element, laypage = layui.laypage, $ = layui.$, menu = layui.menu;
+        laypage.render({
+            elem: 'demo'
+            , count: 70 //数据总数，从服务端得到
+        });
+        menu.init();
+    })
+</script>
+</body>
+</html>

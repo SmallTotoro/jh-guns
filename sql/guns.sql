@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50721
 Source Host           : localhost:3306
-Source Database       : guns
+Source Database       : guns5
 
 Target Server Type    : MYSQL
 Target Server Version : 50721
@@ -13,10 +13,10 @@ File Encoding         : 65001
 Date: 2018-06-26 23:10:40
 */
 
-DROP DATABASE IF EXISTS guns;
-CREATE DATABASE IF NOT EXISTS guns DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+DROP DATABASE IF EXISTS guns5;
+CREATE DATABASE IF NOT EXISTS guns5 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-USE guns;
+USE guns5;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -207,7 +207,7 @@ CREATE TABLE `sys_notice` (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES ('6', '世界', '10', '欢迎使用Guns管理系统', '2017-01-11 08:53:20', '1');
+INSERT INTO `sys_notice` VALUES ('6', '世界', '10', '欢迎使用guns5管理系统', '2017-01-11 08:53:20', '1');
 INSERT INTO `sys_notice` VALUES ('8', '你好', null, '你好', '2017-05-10 19:28:57', '1');
 
 -- ----------------------------
